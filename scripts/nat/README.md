@@ -7,9 +7,11 @@ Este instructivo explica qué hacer con `configurar-nat.sh`.
 - **NAT-1** → en subred pública 1 (`us-east-1a`). Atiende a la privada 1 (`10.0.2.0/24`).
 - **NAT-2** → en subred pública 2 (`us-east-1b`). Atiende a la privada 2 (`10.0.4.0/24`).
 
-Es el **mismo script** en las dos. Lo único que cambia es la variable `RED_PRIVADA` dentro del archivo:
-- En NAT-1 déjala en `10.0.2.0/24`.
-- En NAT-2 cámbiala a `10.0.4.0/24`.
+Es el **mismo script** en las dos. Lo único que cambia es la red privada:
+- En NAT-1: `bash configurar-nat.sh` (usa `10.0.2.0/24`).
+- En NAT-2: `bash configurar-nat.sh 10.0.4.0/24`.
+
+Si pegas el script en la consola en vez de guardarlo como archivo, en NAT-2 cambia la línea `RED_PRIVADA` antes de ejecutarlo. La guía completa del proyecto está en `COMO-SE-HIZO.md`.
 
 ## Pasos (se hacen 2 veces, una por cada NAT)
 

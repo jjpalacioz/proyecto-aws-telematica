@@ -1,0 +1,4 @@
+scripts/aws/ids.env
+*.pem
+.env
+credentials

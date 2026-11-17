@@ -31,9 +31,17 @@ set -e  # si algún comando falla, el script se detiene (para no seguir a ciegas
 # -----------------------------------------------------------------------------
 # PASO 0: Variables que debes revisar según en qué NAT estés
 # -----------------------------------------------------------------------------
-# En NAT-1 (AZ-a), la red privada que atiende es 10.0.2.0/24
-# En NAT-2 (AZ-b), cámbiala a                      10.0.4.0/24
-RED_PRIVADA="10.0.2.0/24"
+# En NAT-1 (AZ-a) la red privada que atiende es 10.0.2.0/24
+# En NAT-2 (AZ-b) tiene que ser                    10.0.4.0/24
+# Puedes pasarla como argumento:
+#   bash configurar-nat.sh 10.0.4.0/24
+# Si no pasas argumento, se usa 10.0.2.0/24 (NAT-1).
+RED_PRIVADA="${1:-10.0.2.0/24}"
+
+if [[ "$RED_PRIVADA" != "10.0.2.0/24" && "$RED_PRIVADA" != "10.0.4.0/24" ]]; then
+  echo "AVISO: RED_PRIVADA=$RED_PRIVADA no es 10.0.2.0/24 ni 10.0.4.0/24."
+  echo "       Sigue solo si de verdad cambiaste el direccionamiento del proyecto."
+fi
 
 # Nombre de la interfaz de red de la instancia. En Ubuntu 24.04 sobre EC2
 # normalmente es "ens5". El script la detecta solo, pero puedes forzarla aquí.
