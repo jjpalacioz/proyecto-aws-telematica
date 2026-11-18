@@ -68,7 +68,7 @@ fi
 echo ">> Comprobando MariaDB en ${DB_HOST}:3306 ..."
 apt-get update -y
 export DEBIAN_FRONTEND=noninteractive
-apt-get install -y apache2 php php-mysql php-xml php-mbstring php-curl php-zip php-gd php-intl unzip curl ca-certificates
+apt-get install -y apache2 php php-mysql php-xml php-mbstring php-curl php-zip php-gd php-intl unzip curl ca-certificates mariadb-client
 if ! php -r "\$e=0; \$s=''; \$c=@fsockopen('${DB_HOST}', 3306, \$e, \$s, 5); exit(\$c ? 0 : 1);"; then
   echo "No hay TCP hacia ${DB_HOST}:3306."
   echo "Revisa que MariaDB esté arriba, bind-address 0.0.0.0, y el security group"
