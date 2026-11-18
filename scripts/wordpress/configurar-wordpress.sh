@@ -88,7 +88,10 @@ cd "$WEB"
 
 if [[ ! -f "$WEB/wp-load.php" ]]; then
   echo ">> Descargando WordPress..."
-  wp core download --allow-root --locale=es_ES
+  # Intenta en español; si el locale no está disponible en el mirror, baja en inglés.
+  # El idioma se puede cambiar luego con: wp language core install es_ES --activate
+  wp core download --allow-root --locale=es_ES \
+    || wp core download --allow-root
 fi
 
 echo ">> Escribiendo wp-config.php (las salts son iguales en las dos EC2)..."
@@ -251,6 +254,10 @@ if [[ "$ROL" == "primario" ]]; then
 
   wp option update show_on_front page --allow-root
   wp option update page_on_front "$INICIO" --allow-root
+
+  # Dejar el sitio en español si el paquete de idioma está disponible (no es crítico).
+  wp language core install es_ES --activate --allow-root 2>/dev/null \
+    && wp site switch-language es_ES --allow-root 2>/dev/null || true
 else
   echo ">> Rol secundario: no se vuelve a instalar WordPress."
   echo "   Esta EC2 usa la base ${DB_HOST} y el mismo código."
