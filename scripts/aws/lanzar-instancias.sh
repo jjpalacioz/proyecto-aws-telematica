@@ -103,15 +103,20 @@ EOF
   printf '%s' "$id"
 }
 
-NAT1="$(lanzar NAT-1 t3.micro "$SUBNET_PUB_1" "$SG_NAT_1" 10.0.1.10 si)"
-HAP1="$(lanzar HAProxy-1 t3.micro "$SUBNET_PUB_1" "$SG_HAPROXY" 10.0.1.20 si)"
-BIND1="$(lanzar BIND-primario t3.micro "$SUBNET_PUB_1" "$SG_BIND" 10.0.1.30 si)"
-WP1="$(lanzar WordPress-1 t3.small "$SUBNET_PRIV_1" "$SG_WP" 10.0.2.10 no)"
-NAT2="$(lanzar NAT-2 t3.micro "$SUBNET_PUB_2" "$SG_NAT_2" 10.0.3.10 si)"
-HAP2="$(lanzar HAProxy-2 t3.micro "$SUBNET_PUB_2" "$SG_HAPROXY" 10.0.3.20 si)"
-BIND2="$(lanzar BIND-secundario t3.micro "$SUBNET_PUB_2" "$SG_BIND" 10.0.3.30 si)"
-WP2="$(lanzar WordPress-2 t3.small "$SUBNET_PRIV_2" "$SG_WP" 10.0.4.10 no)"
-DB="$(lanzar MariaDB t3.small "$SUBNET_PRIV_2" "$SG_DB" 10.0.4.20 no)"
+# Tipo de instancia. El Learner Lab de este equipo tope a 12 vCPU, así que
+# se usa t2.micro (1 vCPU, 1 GB) en las nueve: 9 vCPU en total, cabe de sobra.
+# Se puede sobreescribir exportando TIPO antes de correr el script.
+TIPO="${TIPO:-t2.micro}"
+
+NAT1="$(lanzar NAT-1 "$TIPO" "$SUBNET_PUB_1" "$SG_NAT_1" 10.0.1.10 si)"
+HAP1="$(lanzar HAProxy-1 "$TIPO" "$SUBNET_PUB_1" "$SG_HAPROXY" 10.0.1.20 si)"
+BIND1="$(lanzar BIND-primario "$TIPO" "$SUBNET_PUB_1" "$SG_BIND" 10.0.1.30 si)"
+WP1="$(lanzar WordPress-1 "$TIPO" "$SUBNET_PRIV_1" "$SG_WP" 10.0.2.10 no)"
+NAT2="$(lanzar NAT-2 "$TIPO" "$SUBNET_PUB_2" "$SG_NAT_2" 10.0.3.10 si)"
+HAP2="$(lanzar HAProxy-2 "$TIPO" "$SUBNET_PUB_2" "$SG_HAPROXY" 10.0.3.20 si)"
+BIND2="$(lanzar BIND-secundario "$TIPO" "$SUBNET_PUB_2" "$SG_BIND" 10.0.3.30 si)"
+WP2="$(lanzar WordPress-2 "$TIPO" "$SUBNET_PRIV_2" "$SG_WP" 10.0.4.10 no)"
+DB="$(lanzar MariaDB "$TIPO" "$SUBNET_PRIV_2" "$SG_DB" 10.0.4.20 no)"
 
 IDS=("$NAT1" "$HAP1" "$BIND1" "$WP1" "$NAT2" "$HAP2" "$BIND2" "$WP2" "$DB")
 log "Esperando a que las 9 estén en running..."
