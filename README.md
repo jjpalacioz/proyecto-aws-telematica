@@ -124,10 +124,21 @@ Escrito en el repositorio (falta ejecutarlo en el lab):
 - [x] MariaDB, WordPress y la IP privada en el home
 - [x] Diagrama, plantillas de las 11 pruebas y borrador del documento
 
-Pendiente del equipo, en la cuenta y en el registrador:
+Ejecutado en el Learner Lab (sesión 18 nov 2026):
 
-- [ ] Correr la red y las 9 EC2 en el Learner Lab
-- [ ] Ejecutar NAT, MariaDB, WordPress, HAProxy y BIND dentro de las instancias
-- [ ] Dominio real y delegación pública
-- [ ] Evidencia de N1–N4, D1–D5, B1–B2 y de las capturas de tráfico
-- [ ] Documento final con nombres, figuras y resultados medidos, subido el 20 de noviembre
+- [x] Red y 9 EC2 corriendo en el Learner Lab (t2.micro, tope de 9 instancias)
+- [x] 4 Elastic IP fijas (2 HAProxy + 2 BIND)
+- [x] NAT-1 y NAT-2 funcionando (nftables + forwarding + Source/Dest Check off)
+- [x] MariaDB instalada (base compartida en 10.0.4.20)
+- [x] WordPress-1 (primario) y WordPress-2 (secundario) con banner de IP privada
+- [x] HAProxy-1 y HAProxy-2 balanceando entre las dos WordPress
+- [x] Prueba NAT N1 documentada (docs/pruebas/evidencia-nat-n1.md)
+- [x] Balanceo B1 verificado (HAProxy alterna 10.0.2.10 y 10.0.4.10)
+
+Pendiente del equipo:
+
+- [ ] Dominio real + delegación pública (lo consigue el compañero)
+- [ ] BIND-primario y BIND-secundario (necesitan el dominio real)
+- [ ] Cambiar el dominio temporal `xyz-lab.com` por el real en las dos WordPress
+- [ ] Resto de evidencia: N2–N4, D1–D5, B2 y capturas de tráfico
+- [ ] Documento final con nombres, figuras y resultados medidos, subido el 20 nov
