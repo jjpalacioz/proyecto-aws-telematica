@@ -17,39 +17,20 @@ Estado al 18 nov 2026. Todo lo de infraestructura ya está montado en el Learner
 - Los 2 HAProxy balanceando entre las dos WordPress
 - Los 2 BIND (primario/secundario) autoritativos de **xtz.lat** con transferencia de zona
 
-**Dominio real:** `xtz.lat` (Namecheap)
-**Dominio temporal que todavía usan las WordPress:** `xyz-lab.com` (hay que cambiarlo)
+**Dominio real:** `xtz.lat` (Namecheap) — DELEGADO Y RESOLVIENDO EN PÚBLICO ✅
+**WordPress:** ya apuntan a `http://www.xtz.lat` (dominio temporal cambiado) ✅
+**Verificado:** http://www.xtz.lat carga el sitio de XYZ S.A. con el banner de IP privada ✅
 
 ## Lo que falta
 
-### 1. Delegación en Namecheap (la hacen los compañeros)
-En Namecheap → Domain List → xtz.lat → Manage → Advanced DNS → Personal DNS Server:
-- ns1 -> 23.21.163.138
-- ns2 -> 52.2.122.81
-Luego, pestaña Domain → Nameservers → Custom DNS:
-- ns1.xtz.lat
-- ns2.xtz.lat
+### 1. Delegación en Namecheap — HECHO ✅
+ns1 -> 23.21.163.138, ns2 -> 52.2.122.81, Custom DNS ns1.xtz.lat / ns2.xtz.lat.
+`dig NS xtz.lat` devuelve ns1 y ns2; `dig www.xtz.lat A` devuelve las dos IP de HAProxy.
 
-### 2. Cuando la delegación esté hecha: comprobar que resuelve desde fuera
-Desde cualquier PC (o el celular con datos):
-```
-dig NS xtz.lat +trace
-dig www.xtz.lat A
-dig @23.21.163.138 xtz.lat SOA
-dig @52.2.122.81 xtz.lat SOA
-```
-La delegación puede tardar minutos u horas en propagarse (TTL). Mientras tanto,
-`dig @23.21.163.138 ...` (consulta directa al BIND) ya funciona.
+### 2. Cambiar dominio en las dos WordPress — HECHO ✅
+Las dos WordPress apuntan a http://www.xtz.lat y el sitio carga con el banner de IP privada.
 
-### 3. Cambiar el dominio temporal por el real en las dos WordPress
-En WordPress-1 y WordPress-2 (Session Manager, como root):
-```
-cd /var/www/html
-wp option update home 'http://www.xtz.lat' --allow-root
-wp option update siteurl 'http://www.xtz.lat' --allow-root
-```
-
-### 4. Pruebas que faltan (evidencia para el documento)
+### 3. Pruebas que faltan (evidencia para el documento)
 - NAT: N2 (conntrack), N3 (apagar ip_forward), N4 (entrante vs saliente)
 - DNS: D1 a D5 (dig contra los dos BIND, cambiar serial, apagar primario, round robin)
 - Balanceo: B2 (apagar una WordPress y ver que el sitio sigue)
