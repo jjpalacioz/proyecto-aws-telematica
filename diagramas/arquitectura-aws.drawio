@@ -16,7 +16,7 @@
         </mxCell>
 
         <!-- Dominio / Round Robin -->
-        <mxCell id="dominio" value="Dominio público&#10;DNS Round Robin&#10;(2 registros A)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F4FA;strokeColor=#147EBA;fontColor=#147EBA;fontStyle=1;" vertex="1" parent="1">
+        <mxCell id="dominio" value="Dominio público www.xtz.lat&#10;DNS Round Robin&#10;(2 registros A)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F4FA;strokeColor=#147EBA;fontColor=#147EBA;fontStyle=1;" vertex="1" parent="1">
           <mxGeometry x="30" y="300" width="120" height="70" as="geometry" />
         </mxCell>
 
@@ -157,7 +157,7 @@
         </mxCell>
 
         <!-- ===================== Leyenda ===================== -->
-        <mxCell id="leyenda" value="Leyenda&#10;— HTTP :80 (público → HAProxy → WordPress)&#10;— DNS :53 (BIND9 autoritativo, Round Robin)&#10;— MySQL :3306 (WordPress → MariaDB)&#10;· · · salida a Internet por NAT de la misma AZ&#10;· · · transferencia de zona BIND primario → secundario&#10;&#10;9 instancias EC2 · Ubuntu 24.04 · NAT y balanceo caseros (sin NAT Gateway ni ALB)" style="text;html=1;align=left;verticalAlign=top;fontSize=11;fillColor=#F5F5F5;strokeColor=#CCCCCC;rounded=1;spacingLeft=10;spacingTop=6;" vertex="1" parent="1">
+        <mxCell id="leyenda" value="Leyenda&#10;— HTTP :80 (público → HAProxy → WordPress)&#10;— DNS :53 (BIND9 autoritativo, Round Robin)&#10;— MySQL :3306 (WordPress → MariaDB)&#10;· · · salida a Internet por NAT de la misma AZ&#10;· · · transferencia de zona BIND primario → secundario&#10;&#10;9 instancias EC2 · t2.micro · Ubuntu 24.04 · NAT y balanceo caseros (sin NAT Gateway ni ALB)" style="text;html=1;align=left;verticalAlign=top;fontSize=11;fillColor=#F5F5F5;strokeColor=#CCCCCC;rounded=1;spacingLeft=10;spacingTop=6;" vertex="1" parent="1">
           <mxGeometry x="60" y="560" width="150" height="360" as="geometry" />
         </mxCell>
 
