@@ -211,6 +211,22 @@ cat > /etc/apache2/sites-available/000-default.conf <<EOF
 </VirtualHost>
 EOF
 
+# .htaccess de WordPress: necesario para los permalinks bonitos (/sedes/, /contacto/).
+# wp rewrite flush no siempre lo crea (permisos), así que se escribe explícitamente.
+cat > "$WEB/.htaccess" <<'HTACCESS'
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+# END WordPress
+HTACCESS
+chown www-data:www-data "$WEB/.htaccess"
+
 if [[ "$ROL" == "primario" ]]; then
   if ! wp core is-installed --allow-root >/dev/null 2>&1; then
     echo ">> Instalando el sitio (solo en el primario)..."
