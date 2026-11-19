@@ -1,0 +1,167 @@
+<mxfile host="app.diagrams.net" agent="Kiro" version="24.0.0" type="device">
+  <diagram id="arquitectura-si3002-n2" name="Arquitectura AWS - SI3002 N2">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ===================== Título ===================== -->
+        <mxCell id="titulo" value="Proyecto N2 - SI3002 Telemática&#10;WordPress en Alta Disponibilidad sobre AWS (us-east-1)" style="text;html=1;align=center;verticalAlign=middle;fontSize=18;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="400" y="20" width="800" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== Usuarios ===================== -->
+        <mxCell id="usuarios" value="Usuarios&#10;(Internet)" style="shape=mxgraph.aws4.user;html=1;sketch=0;aspect=fixed;fillColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="60" y="440" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Dominio / Round Robin -->
+        <mxCell id="dominio" value="Dominio público www.xtz.lat&#10;DNS Round Robin&#10;(2 registros A)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F4FA;strokeColor=#147EBA;fontColor=#147EBA;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="300" width="120" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== Nube AWS ===================== -->
+        <mxCell id="awscloud" value="AWS Cloud · us-east-1" style="points=[[0,0],[0.25,0],[0.5,0],[0.75,0],[1,0],[1,0.25],[1,0.5],[1,0.75],[1,1],[0.75,1],[0.5,1],[0.25,1],[0,1],[0,0.75],[0,0.5],[0,0.25]];outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=12;fontStyle=0;container=1;pointerEvents=0;collapsible=0;recursiveResize=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_aws_cloud_alt;strokeColor=#232F3E;fillColor=none;verticalAlign=top;align=left;spacingLeft=30;fontColor=#232F3E;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="220" y="90" width="1320" height="860" as="geometry" />
+        </mxCell>
+
+        <!-- Internet Gateway -->
+        <mxCell id="igw" value="Internet Gateway" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#8C4FFF;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.internet_gateway;" vertex="1" parent="1">
+          <mxGeometry x="60" y="200" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== VPC ===================== -->
+        <mxCell id="vpc" value="VPC   10.0.0.0/16" style="points=[[0,0],[0.25,0],[0.5,0],[0.75,0],[1,0],[1,0.25],[1,0.5],[1,0.75],[1,1],[0.75,1],[0.5,1],[0.25,1],[0,1],[0,0.75],[0,0.5],[0,0.25]];outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=12;fontStyle=0;container=1;pointerEvents=0;collapsible=0;recursiveResize=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_vpc;strokeColor=#8C4FFF;fillColor=none;verticalAlign=top;align=left;spacingLeft=30;fontColor=#8C4FFF;dashed=0;" vertex="1" parent="awscloud">
+          <mxGeometry x="140" y="60" width="1140" height="770" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== AZ us-east-1a ===================== -->
+        <mxCell id="aza" value="Availability Zone   us-east-1a" style="fillColor=none;strokeColor=#00A4A6;dashed=1;verticalAlign=top;fontStyle=2;fontColor=#00A4A6;whiteSpace=wrap;html=1;align=left;spacingLeft=10;" vertex="1" parent="vpc">
+          <mxGeometry x="30" y="40" width="1080" height="340" as="geometry" />
+        </mxCell>
+
+        <!-- Subred pública 1 -->
+        <mxCell id="pub1" value="Subred pública 1   10.0.1.0/24" style="points=[[0,0],[0.25,0],[0.5,0],[0.75,0],[1,0],[1,0.25],[1,0.5],[1,0.75],[1,1],[0.75,1],[0.5,1],[0.25,1],[0,1],[0,0.75],[0,0.5],[0,0.25]];outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=11;fontStyle=0;container=1;pointerEvents=0;collapsible=0;recursiveResize=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_security_group;strokeColor=#7AA116;fillColor=#E9F9DB;verticalAlign=top;align=left;spacingLeft=30;fontColor=#7AA116;dashed=0;" vertex="1" parent="aza">
+          <mxGeometry x="20" y="40" width="680" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="nat1" value="NAT-1&#10;nftables&#10;10.0.1.10" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#8C4FFF;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;html=1;fontSize=10;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.instance;" vertex="1" parent="pub1">
+          <mxGeometry x="40" y="45" width="48" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="hap1" value="HAProxy-1&#10;EIP&#10;10.0.1.20" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#E7157B;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;html=1;fontSize=10;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.instance;" vertex="1" parent="pub1">
+          <mxGeometry x="300" y="45" width="48" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="dns1" value="BIND9 primario&#10;EIP&#10;10.0.1.30" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#4D72F3;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;html=1;fontSize=10;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.instance;" vertex="1" parent="pub1">
+          <mxGeometry x="560" y="45" width="48" height="48" as="geometry" />
+        </mxCell>
+
+        <!-- Subred privada 1 -->
+        <mxCell id="priv1" value="Subred privada 1   10.0.2.0/24" style="points=[[0,0],[0.25,0],[0.5,0],[0.75,0],[1,0],[1,0.25],[1,0.5],[1,0.75],[1,1],[0.75,1],[0.5,1],[0.25,1],[0,1],[0,0.75],[0,0.5],[0,0.25]];outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=11;fontStyle=0;container=1;pointerEvents=0;collapsible=0;recursiveResize=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_security_group;strokeColor=#00A4A6;fillColor=#E6F6F7;verticalAlign=top;align=left;spacingLeft=30;fontColor=#147EBA;dashed=0;" vertex="1" parent="aza">
+          <mxGeometry x="740" y="40" width="320" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="wp1" value="WordPress-1&#10;10.0.2.10" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#F58534;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;html=1;fontSize=10;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.instance;" vertex="1" parent="priv1">
+          <mxGeometry x="130" y="45" width="48" height="48" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== AZ us-east-1b ===================== -->
+        <mxCell id="azb" value="Availability Zone   us-east-1b" style="fillColor=none;strokeColor=#00A4A6;dashed=1;verticalAlign=top;fontStyle=2;fontColor=#00A4A6;whiteSpace=wrap;html=1;align=left;spacingLeft=10;" vertex="1" parent="vpc">
+          <mxGeometry x="30" y="400" width="1080" height="350" as="geometry" />
+        </mxCell>
+
+        <!-- Subred pública 2 -->
+        <mxCell id="pub2" value="Subred pública 2   10.0.3.0/24" style="points=[[0,0],[0.25,0],[0.5,0],[0.75,0],[1,0],[1,0.25],[1,0.5],[1,0.75],[1,1],[0.75,1],[0.5,1],[0.25,1],[0,1],[0,0.75],[0,0.5],[0,0.25]];outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=11;fontStyle=0;container=1;pointerEvents=0;collapsible=0;recursiveResize=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_security_group;strokeColor=#7AA116;fillColor=#E9F9DB;verticalAlign=top;align=left;spacingLeft=30;fontColor=#7AA116;dashed=0;" vertex="1" parent="azb">
+          <mxGeometry x="20" y="50" width="680" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="nat2" value="NAT-2&#10;nftables&#10;10.0.3.10" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#8C4FFF;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;html=1;fontSize=10;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.instance;" vertex="1" parent="pub2">
+          <mxGeometry x="40" y="45" width="48" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="hap2" value="HAProxy-2&#10;EIP&#10;10.0.3.20" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#E7157B;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;html=1;fontSize=10;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.instance;" vertex="1" parent="pub2">
+          <mxGeometry x="300" y="45" width="48" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="dns2" value="BIND9 secundario&#10;EIP&#10;10.0.3.30" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#4D72F3;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;html=1;fontSize=10;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.instance;" vertex="1" parent="pub2">
+          <mxGeometry x="560" y="45" width="48" height="48" as="geometry" />
+        </mxCell>
+
+        <!-- Subred privada 2 -->
+        <mxCell id="priv2" value="Subred privada 2   10.0.4.0/24" style="points=[[0,0],[0.25,0],[0.5,0],[0.75,0],[1,0],[1,0.25],[1,0.5],[1,0.75],[1,1],[0.75,1],[0.5,1],[0.25,1],[0,1],[0,0.75],[0,0.5],[0,0.25]];outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=11;fontStyle=0;container=1;pointerEvents=0;collapsible=0;recursiveResize=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_security_group;strokeColor=#00A4A6;fillColor=#E6F6F7;verticalAlign=top;align=left;spacingLeft=30;fontColor=#147EBA;dashed=0;" vertex="1" parent="azb">
+          <mxGeometry x="740" y="50" width="320" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="wp2" value="WordPress-2&#10;10.0.4.10" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#F58534;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;html=1;fontSize=10;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.instance;" vertex="1" parent="priv2">
+          <mxGeometry x="40" y="45" width="48" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="db" value="MariaDB&#10;10.0.4.20" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#C925D1;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;html=1;fontSize=10;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.rds;" vertex="1" parent="priv2">
+          <mxGeometry x="200" y="45" width="48" height="48" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== Conexiones ===================== -->
+        <!-- Usuarios -> dominio -> DNS -->
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;strokeColor=#147EBA;fontColor=#147EBA;" edge="1" parent="1" source="usuarios" target="dominio">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="DNS :53" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;strokeColor=#4D72F3;fontColor=#4D72F3;dashed=1;" edge="1" parent="1" source="dominio" target="dns1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="DNS :53" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;strokeColor=#4D72F3;fontColor=#4D72F3;dashed=1;" edge="1" parent="1" source="dominio" target="dns2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Usuarios -> IGW -> HAProxy -->
+        <mxCell id="e4" value="HTTP :80" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;strokeColor=#E7157B;fontColor=#E7157B;" edge="1" parent="1" source="usuarios" target="igw">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" value="HTTP :80" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;strokeColor=#E7157B;fontColor=#E7157B;" edge="1" parent="1" source="igw" target="hap1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" value="HTTP :80" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;strokeColor=#E7157B;fontColor=#E7157B;" edge="1" parent="1" source="igw" target="hap2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- HAProxy -> WordPress (balanceo cruzado) -->
+        <mxCell id="e7" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;strokeColor=#F58534;" edge="1" parent="1" source="hap1" target="wp1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;strokeColor=#F58534;" edge="1" parent="1" source="hap1" target="wp2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;strokeColor=#F58534;" edge="1" parent="1" source="hap2" target="wp1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;strokeColor=#F58534;" edge="1" parent="1" source="hap2" target="wp2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- WordPress -> MariaDB -->
+        <mxCell id="e11" value="MySQL :3306" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;strokeColor=#C925D1;fontColor=#C925D1;" edge="1" parent="1" source="wp1" target="db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" value="MySQL :3306" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;strokeColor=#C925D1;fontColor=#C925D1;" edge="1" parent="1" source="wp2" target="db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Salida por NAT (misma AZ) -->
+        <mxCell id="e13" value="salida 0.0.0.0/0" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;strokeColor=#8C4FFF;fontColor=#8C4FFF;dashed=1;" edge="1" parent="1" source="wp1" target="nat1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" value="salida 0.0.0.0/0" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;strokeColor=#8C4FFF;fontColor=#8C4FFF;dashed=1;" edge="1" parent="1" source="wp2" target="nat2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e15" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;strokeColor=#8C4FFF;dashed=1;" edge="1" parent="1" source="nat1" target="igw">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e16" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;strokeColor=#8C4FFF;dashed=1;" edge="1" parent="1" source="nat2" target="igw">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Transferencia de zona BIND -->
+        <mxCell id="e17" value="transferencia&#10;de zona (AXFR)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=classic;strokeColor=#4D72F3;fontColor=#4D72F3;dashed=1;" edge="1" parent="1" source="dns1" target="dns2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== Leyenda ===================== -->
+        <mxCell id="leyenda" value="Leyenda&#10;— HTTP :80 (público → HAProxy → WordPress)&#10;— DNS :53 (BIND9 autoritativo, Round Robin)&#10;— MySQL :3306 (WordPress → MariaDB)&#10;· · · salida a Internet por NAT de la misma AZ&#10;· · · transferencia de zona BIND primario → secundario&#10;&#10;9 instancias EC2 · t2.micro · Ubuntu 24.04 · NAT y balanceo caseros (sin NAT Gateway ni ALB)" style="text;html=1;align=left;verticalAlign=top;fontSize=11;fillColor=#F5F5F5;strokeColor=#CCCCCC;rounded=1;spacingLeft=10;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="60" y="560" width="150" height="360" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
