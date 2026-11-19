@@ -4,6 +4,24 @@ Estos dibujos describen el diseño del repositorio. Para el PDF de la entrega ha
 
 Todavía no hay una consola de AWS que fotografiar. Esas capturas salen el día que la VPC esté creada.
 
+## Diagrama de arquitectura AWS (draw.io)
+
+El archivo [`arquitectura-aws.drawio`](arquitectura-aws.drawio) contiene el diagrama de arquitectura con los iconos oficiales de AWS, listo para editar y exportar.
+
+**Cómo abrirlo y exportarlo:**
+
+1. Entra a [app.diagrams.net](https://app.diagrams.net) (draw.io).
+2. `File → Open from → Device` y elige `arquitectura-aws.drawio`. También se puede importar desde GitHub con `File → Open from → GitHub`.
+3. Para la figura del documento: `File → Export as → PNG` (o SVG/PDF), con fondo transparente o blanco.
+
+**Qué muestra:**
+
+- VPC `10.0.0.0/16` con las dos AZ (`us-east-1a` y `us-east-1b`).
+- Las 4 subredes (2 públicas, 2 privadas) y las 9 instancias EC2 con su IP.
+- Flujos: DNS `:53` (Round Robin a los dos BIND9), HTTP `:80` (Internet Gateway → HAProxy → WordPress, balanceo cruzado), MySQL `:3306` (WordPress → MariaDB).
+- Salida a Internet de cada subred privada por la instancia NAT de su misma AZ.
+- Transferencia de zona del BIND9 primario al secundario.
+
 ## Figura. Vista lógica de las 9 EC2
 
 ```mermaid
